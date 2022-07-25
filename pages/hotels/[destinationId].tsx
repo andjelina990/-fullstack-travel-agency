@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 import { GetServerSidePropsContext } from 'next';
-import { css } from '@emotion/react';
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -8,14 +7,14 @@ import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 
 import { getHotelsById, queryParamToNumber } from '../../util/databaseHa';
 
-const hover = css`
-  &:hover {
-    background-color: var(--blue);
-    color: #fff;
-    transition: 0.3 easy;
-    cursor: pointer;
-  }
-`;
+// const hover = css`
+//   &:hover {
+//     background-color: var(--blue);
+//     color: #fff;
+//     transition: 0.3 easy;
+//     cursor: pointer;
+//   }
+// `;
 
 type Props = {
   animal: {
@@ -160,9 +159,7 @@ export default function SingleAnimal(props: Props) {
           />
 
           <Link href="/checkout">
-            <a css={hover} className="book-btn">
-              Book now
-            </a>
+            <a className="book-btn">Book now</a>
           </Link>
         </div>
         <div className="thumbnail">
@@ -171,10 +168,10 @@ export default function SingleAnimal(props: Props) {
       </article>
 
       <div className="section wave">
-        <div className="wave wave1"/>
-        <div className="wave wave2"/>
-        <div className="wave wave3"/>
-        <div className="wavewave4"/>
+        <div className="wave wave1" />
+        <div className="wave wave2" />
+        <div className="wave wave3" />
+        <div className="wavewave4" />
       </div>
     </div>
   );

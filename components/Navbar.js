@@ -4,7 +4,7 @@ function Navbar(props) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
+        <div className="container-fluid d-flex justify-content-between">
           <button
             className="navbar-toggler"
             type="button"

@@ -7,7 +7,7 @@ import {
   getUserByValidSessionToken,
   User,
 } from '../../util/databaseHa';
-import { css } from '@emotion/react';
+
 
 type Props = {
   user: User | null;
@@ -36,15 +36,15 @@ type UsersBookings = {
   night_price: number;
 };
 
-const style = css`
-  min-height: 500px;
-  text-align: center;
-  margin-top: 30px;
-`;
+// const style = css`
+//   min-height: 500px;
+//   text-align: center;
+//   margin-top: 30px;
+// `;
 
-const main = css`
-  margin-bottom: 50px;
-`;
+// const main = css`
+//   margin-bottom: 50px;
+// `;
 export default function UserDetail(props: Props) {
   const [bookingData, setBookingData] = useState<UsersBookings[]>(
     props.bookingsByUserId,
@@ -109,8 +109,8 @@ export default function UserDetail(props: Props) {
         <meta name="description" content="About the app" />
       </Head>
 
-      <main css={style}>
-        <div css={main}>
+      <main>
+        <div>
           <h1>Welcome to your profile page: {props.user.username}</h1>
         </div>
         {!errorMsg.have ? (
