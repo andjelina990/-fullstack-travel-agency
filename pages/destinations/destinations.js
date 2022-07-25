@@ -87,7 +87,7 @@ export default function Destinations(props) {
                     {place.description}
                   </p>
                 </div>
-                <div className="card-footer">
+                <div className="card-footer  ">
                   <button
                     className={
                       currentCoockie.includes(place.id)
@@ -113,7 +113,7 @@ export default function Destinations(props) {
                       : 'Add to WishList'}
                   </button>
                   <Link href={`/destinations/${place.id}`}>
-                    <button className="btn blue mt-3 d-inline-block">
+                    <button className=" arrow mx-3 d-inline-block p-2">
                       More <i className="fas fa-arrow-right" />
                     </button>
                   </Link>

@@ -9,7 +9,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+li {
+  list-style: none;
+}
 * {
   box-sizing: border-box;
 }
@@ -909,4 +911,15 @@ h1:after {
   background: rgba(212, 209, 209, 0.2) !important;
   padding: 20px;
   border-radius: 5px;
+}
+
+.arrow {
+  background-color: #00aeef;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.arrow:hover {
+  background-color: #dc3545;
 }

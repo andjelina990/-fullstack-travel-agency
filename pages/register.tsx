@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import { RegisterResponseBody } from './api/register';
 import { useRouter } from 'next/router';
@@ -65,32 +65,37 @@ export default function Register(props: Props) {
         <title>Register</title>
         <meta name="description" content="Register a new user" />
       </Head>
-      <main style={{ minHeight: '500px' }}>
+      <main
+        className="my-4"
+        style={{ minHeight: '500px', textAlign: 'center' }}
+      >
         <h1>Register</h1>
-        <label>
-          username:{' '}
-          <input
-            value={username}
-            onChange={(event) => {
-              setUsername(event.currentTarget.value);
-            }}
-          />
-        </label>
+        <div className="my-5">
+          <label>
+            username:{' '}
+            <input
+              value={username}
+              onChange={(event) => {
+                setUsername(event.currentTarget.value);
+              }}
+            />
+          </label>
 
-        <label>
-          password:{' '}
-          <input
-            value={password}
-            onChange={(event) => {
-              setPassword(event.currentTarget.value);
-            }}
-          />
-        </label>
-        <button onClick={() => registerHandler()}>Register</button>
+          <label>
+            password:{' '}
+            <input
+              value={password}
+              onChange={(event) => {
+                setPassword(event.currentTarget.value);
+              }}
+            />
+          </label>
+          <button onClick={() => registerHandler()}>Register</button>
 
-        {errors.map((error) => (
-          <span key={`error${error.message}`}>{error.message}</span>
-        ))}
+          {errors.map((error) => (
+            <span key={`error${error.message}`}>{error.message}</span>
+          ))}
+        </div>
       </main>
     </div>
   );
