@@ -39,11 +39,7 @@ export default function Contact() {
                   name="message"
                   placeholder="Write message"
                 />
-                <input
-                  type="hidden"
-                  name="_next"
-                  value="http://localhost:3000/thankyou"
-                />
+                <input type="hidden" name="_next" value="/thankyou" />
                 <input type="hidden" name="_subject" value="New Email!" />
                 <input type="hidden" name="_captcha" value="false" />
                 <button className="submit-btn">Send</button>
@@ -53,11 +49,7 @@ export default function Contact() {
         </div>
         <div className="img">
           <div className="social">
-            <ShareButton
-              url="http://localhost:3000/contact"
-              round={true}
-              size={50}
-            />
+            <ShareButton url="/contact" round={true} size={50} />
           </div>
           <img className="email-icon" src="email.svg" alt="" />
         </div>

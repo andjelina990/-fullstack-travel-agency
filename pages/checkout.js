@@ -61,7 +61,7 @@ export default function Checkout(props) {
   }, []);
 
   const submitHandler = async () => {
-    const insertResponse = await fetch('http://localhost:3000/api/booking', {
+    const insertResponse = await fetch('/api/booking', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
