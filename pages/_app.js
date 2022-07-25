@@ -1,19 +1,9 @@
-import { Global } from '@emotion/react';
 import { useCallback, useEffect, useState } from 'react';
-import CookiesModal from '../components/cookies/CookiesModal';
 import Layout from '../components/Layout';
 import '../styles/globals.css';
-import { getLocalStorage, setLocalStorage } from '../util/localStorage';
 
-const cookie = (isOpen) => css`
-  height: ${isOpen ? '100px' : 0};
-  overflow: hidden;
-  transition: all 200ms ease-in;
-`;
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
-  const [areCookiesAccepted, setAreCookiesAccepted] = useState(false);
-  const [dietCounter, setDietCounter] = useState(0);
 
   const refreshUserProfile = useCallback(async () => {
     const profileResponse = await fetch('/api/profile');

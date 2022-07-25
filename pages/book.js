@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Router from 'next/router';
 import { setParsedCookie } from '../util/cookies';
 import { css } from '@emotion/react';
@@ -17,6 +17,7 @@ export default function Checkout() {
 
   const [country, setCountry] = useState('');
   const [card, setCard] = useState('');
+  console.log(card);
   const [expiration, setExpiration] = useState('');
   const [secCode, setSecCode] = useState('');
   const [errForm, setErrForm] = useState('');
@@ -44,11 +45,11 @@ export default function Checkout() {
     setParsedCookie('diet', []);
   };
 
-  const checkoutInfo = (e) => {
+  const checkoutInfo = async (e) => {
     e.preventDefault();
     if (!validationForm()) {
       clearCookies();
-      Router.push('/thankyou');
+      await Router.push('/thankyou');
     } else {
     }
   };

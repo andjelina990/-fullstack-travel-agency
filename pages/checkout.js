@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { getParsedCookie, setParsedCookie } from '../util/cookies';
 import { getHotelsById } from '../util/databaseHa';
@@ -127,19 +127,6 @@ export async function getServerSideProps(context) {
   if (!animal) {
     context.res.statusCode = 404;
   }
-
-  // if (
-  //   context.req.headers.host &&
-  //   context.req.headers['x-forwarded-proto'] &&
-  //   context.req.headers['x-forwarded-proto'] !== 'https'
-  // ) {
-  //   return {
-  //     redirect: {
-  //       destination: `https://${context.req.headers.host}/api/booking`,
-  //       permanent: true,
-  //     },
-  //   };
-  // }
 
   return {
     props: {

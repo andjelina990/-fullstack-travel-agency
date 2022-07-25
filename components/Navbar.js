@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import React from 'react';
 
 function Navbar(props) {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-lg bg-light">
+        <div className="container-fluid">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarTogglerDemo01"
@@ -15,16 +14,16 @@ function Navbar(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon" />
           </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-              <li class="nav-item bg-danger rounded-pill px-3 ">
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul clasName="navbar-nav me-auto mb-2 mb-lg-0 ">
+              <li className="nav-item bg-danger rounded-pill px-3 ">
                 <Link href="/">
                   <a className="nav-link">Home</a>
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link href="/destinations/destinations">
                   <a className="nav-link list-unstyled">Destinations</a>
                 </Link>
@@ -64,13 +63,13 @@ function Navbar(props) {
               {props.user && props.user.username}
             </li>
 
-            <ul class="d-flex list-unstyled my-1">
-              <li class="nav-item">
+            <ul className="d-flex list-unstyled my-1">
+              <li className="nav-item">
                 <Link href="/login">
                   <a className="nav-link">LOGIN</a>
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link href="/register">
                   <a className="nav-link">REGISTER</a>
                 </Link>

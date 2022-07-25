@@ -35,3 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 *.tsbuildinfo
 final_project_2
+*.tsbuildinfo

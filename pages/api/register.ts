@@ -41,7 +41,6 @@ export default async function handler(
     const user = req.body;
     console.log(user);
 
-    const username = req.body.username;
     const passwordHash = await bcrypt.hash(req.body.password, 12);
 
     // console.log('hash', passwordHash);
@@ -55,7 +54,6 @@ export default async function handler(
       session.token,
     );
 
-    // if you want to use username as identifier return the username too
     res
       .status(200)
       // Tells the browser to create the cookie for us

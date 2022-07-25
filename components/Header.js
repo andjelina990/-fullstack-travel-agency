@@ -348,9 +348,6 @@ function Header() {
               </div>
             </div>
           </div>
-          {/* <button className="btn btn-danger btn-lg mx-auto mt-4">
-            View all packages
-          </button>{' '} */}
         </article>
         <button
           type="button"

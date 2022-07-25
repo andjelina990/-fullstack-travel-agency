@@ -268,8 +268,6 @@ export async function getDestinationsAndHotelsById(destinationId: number) {
     destinations.id=${destinationId}
   `;
   return destinationHotels;
-
-  console.log(destinationHotels);
 }
 
 // export async function getHotelsById(id: number | undefined) {
@@ -343,7 +341,7 @@ export async function addToBookingPlan(
   start_date: Date,
 ) {
   try {
-    const bookingPlan = await sql`
+    await sql`
   INSERT INTO booking
     (nights, hotel_id, user_id, start_date)
   VALUES

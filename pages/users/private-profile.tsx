@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BASE_URL } from '../../config/urlConfig';
 import {
   getBookingPlan,
@@ -24,6 +24,18 @@ type Props = {
   }[];
 };
 
+type UsersBookings = {
+  bookingid: number;
+  nights: number;
+  start_date: string;
+  id: number;
+  destination: string;
+  description: string;
+  name: string;
+  destination_id: number;
+  night_price: number;
+};
+
 const style = css`
   min-height: 500px;
   text-align: center;
@@ -34,20 +46,9 @@ const main = css`
   margin-bottom: 50px;
 `;
 export default function UserDetail(props: Props) {
-  if (!props.user) {
-    return (
-      <>
-        <Head>
-          <title>User not found</title>
-          <meta name="description" content="User not found" />
-        </Head>
-        <h1>404 - User not found</h1>
-        Better luck next time
-      </>
-    );
-  }
-
-  const [bookingData, setBookingData] = useState(props.bookingsByUserId);
+  const [bookingData, setBookingData] = useState<UsersBookings[]>(
+    props.bookingsByUserId,
+  );
   console.log(bookingData);
   // const [bookingData, setBookingData] = useState([]);
   // const [requestFinish, setRequestFinish] = useState(false);
@@ -89,45 +90,18 @@ export default function UserDetail(props: Props) {
       });
   };
 
-  const BookingLayout = () => {
-    return !errorMsg.have ? (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Hotel</th>
-            <th>Destination</th>
-            <th>Nights</th>
-            <th>Start date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookingData.map((booking) => {
-            return (
-              <tr key={booking.bookingid}>
-                <td>{booking.name}</td>
-                <td>{booking.destination}</td>
-                <td>{booking.nights}</td>
-                <td>{booking.start_date}</td>
-
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => removeBooking(booking.bookingid)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    ) : (
-      <h3>Error</h3>
+  if (!props.user) {
+    return (
+      <>
+        <Head>
+          <title>User not found</title>
+          <meta name="description" content="User not found" />
+        </Head>
+        <h1>404 - User not found</h1>
+        Better luck next time
+      </>
     );
-  };
-
+  }
   return (
     <div>
       <Head>
@@ -137,12 +111,44 @@ export default function UserDetail(props: Props) {
 
       <main css={style}>
         <div css={main}>
-          {' '}
           <h1>Welcome to your profile page: {props.user.username}</h1>
         </div>
-        {/* <div>id: {props.user.id}</div>
-        <div>username: {props.user.username}</div> */}
-        <BookingLayout />
+        {!errorMsg.have ? (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Hotel</th>
+                <th>Destination</th>
+                <th>Nights</th>
+                <th>Start date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookingData.map((booking) => {
+                return (
+                  <tr key={booking.bookingid}>
+                    <td>{booking.name}</td>
+                    <td>{booking.destination}</td>
+                    <td>{booking.nights}</td>
+                    <td>{booking.start_date}</td>
+
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeBooking(booking.bookingid)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <h3>Error</h3>
+        )}
       </main>
     </div>
   );
@@ -156,14 +162,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context.req.cookies.sessionToken,
   );
 
-  if (!user) {
-    return {
-      props: { user: null },
-    };
-  }
-  const bookingsByUserId = await getBookingPlan(user.id);
-
   if (user) {
+    const bookingsByUserId = await getBookingPlan(user.id);
     return {
       props: {
         user: user,

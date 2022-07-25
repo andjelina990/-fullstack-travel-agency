@@ -1,5 +1,3 @@
-import React from 'react';
-import Layout from '../components/Layout';
 import Head from 'next/head';
 import { css } from '@emotion/react';
 
@@ -112,50 +110,3 @@ function thankyou() {
 }
 
 export default thankyou;
-
-{
-  /* <div>
-  <section className="login">
-    <div className="color"></div>
-    <div className="color"></div>
-    <div className="color"></div>
-    <div className="box">
-      <div className="square"></div>
-      <div className="square"></div>
-      <div className="square"></div>
-      <div className="square"></div>
-      <div className="square"></div>
-
-      <div className="login-container">
-        <div className="form">
-          <h2>Login Form</h2>
-          <form>
-            <label>
-              username:
-              <input
-                value={username}
-                onChange={(event) => {
-                  setUsername(event.currentTarget.value);
-                }}
-              />
-            </label>
-            <label>
-              password:{' '}
-              <input
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.currentTarget.value);
-                }}
-              />
-            </label>
-            <button onClick={() => loginHandler()}>Login</button>
-            {errors.map((error) => (
-              <div key={`error-${error.message}`}>{error.message}</div>
-            ))}
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>; */
-}

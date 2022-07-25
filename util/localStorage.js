@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function getLocalStorage(key) {
   try {
     return JSON.parse(window.localStorage.getItem(key));

@@ -6,11 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 
-import {
-  Animal,
-  getHotelsById,
-  queryParamToNumber,
-} from '../../util/databaseHa';
+import { getHotelsById, queryParamToNumber } from '../../util/databaseHa';
 
 const hover = css`
   &:hover {
@@ -35,16 +31,16 @@ export type NightHotel = {
   eatCounter: number;
 };
 export default function SingleAnimal(props: Props) {
-  const [isInDiet, setInDiet] = useState('eatCounter' in props.animal);
+  const [isInDiet, setIsInDiet] = useState('eatCounter' in props.animal);
   const [eatCounter, setEatCounter] = useState(props.animal.eatCounter || 0);
 
-  const [currentCoockie, setCurrentCoockie] = useState(
-    Cookies.get('night') ? getParsedCookie('night') : [],
-  );
-
   useEffect(() => {
-    setParsedCookie('night', currentCoockie);
-  }, [currentCoockie]);
+    if (Cookies.get('night')) {
+      setParsedCookie('night', getParsedCookie('night'));
+    } else {
+      setParsedCookie('night', []);
+    }
+  }, []);
   console.log(props.animal);
 
   return (
@@ -82,7 +78,7 @@ export default function SingleAnimal(props: Props) {
                       (nightHotel: NightHotel) =>
                         nightHotel.id !== props.animal.id,
                     );
-                    setInDiet(false);
+                    setIsInDiet(false);
 
                     setEatCounter(0);
                   } else {
@@ -90,7 +86,7 @@ export default function SingleAnimal(props: Props) {
                       ...currentNight,
                       { id: props.animal.id, eatCounter: 1 },
                     ];
-                    setInDiet(true);
+                    setIsInDiet(true);
                     setEatCounter(1);
                   }
                   setParsedCookie('night', newDiet);
@@ -174,110 +170,11 @@ export default function SingleAnimal(props: Props) {
         </div>
       </article>
 
-      {/* <div>Price per Night:{props.animal.nightPrice}</div>
-
-        <div>
-          <button
-            onClick={() => {
-              const currentNight = Cookies.get('night')
-                ? getParsedCookie('night')
-                : [];
-              let newDiet;
-
-              if (
-                currentNight.find(
-                  (nightHotel: NightHotel) => props.animal.id === nightHotel.id,
-                )
-              ) {
-                newDiet = currentNight.filter(
-                  (nightHotel: NightHotel) => nightHotel.id !== props.animal.id,
-                );
-                setInDiet(false);
-
-                setEatCounter(0);
-              } else {
-                newDiet = [
-                  ...currentNight,
-                  { id: props.animal.id, eatCounter: 1 },
-                ];
-                setInDiet(true);
-                setEatCounter(1);
-              }
-              setParsedCookie('night', newDiet);
-            }}
-          >
-            {isInDiet ? 'remove nights' : 'add to nights'}
-          </button>
-          <br />
-          {isInDiet ? (
-            <>
-              {eatCounter}
-              <button
-                onClick={() => {
-                  setEatCounter(eatCounter + 1);
-                  const currentNight = Cookies.get('night')
-                    ? getParsedCookie('night')
-                    : [];
-                  const currentFruitInDiet = currentNight.find(
-                    (nightHotel: NightHotel) =>
-                      props.animal.id === nightHotel.id,
-                  );
-                  currentFruitInDiet.eatCounter += 1;
-                  setParsedCookie('night', currentNight);
-                }}
-              >
-                +
-              </button>
-              <button
-                onClick={() => {
-                  if (eatCounter > 0) {
-                    setEatCounter(eatCounter - 1);
-                    const currentDiet = Cookies.get('night')
-                      ? getParsedCookie('night')
-                      : [];
-                    const currentFruitInDiet = currentDiet.find(
-                      (nightHotel: NightHotel) =>
-                        props.animal.id === nightHotel.id,
-                    );
-                    currentFruitInDiet.eatCounter -= 1;
-                    setParsedCookie('night', currentDiet);
-                  }
-                }}
-              >
-                -
-              </button>
-            </>
-          ) : (
-            ''
-          )}{' '}
-        </div>
-
-        <p>Pick a date</p>
-        <input
-          type="date"
-          onInput={(e) => {
-            const currentDiet = Cookies.get('night')
-              ? getParsedCookie('night')
-              : [];
-            const currentFruitInDiet = currentDiet.find(
-              (nightHotel: NightHotel) => props.animal.id === nightHotel.id,
-            );
-            currentFruitInDiet.startDate = e.target.value;
-            console.log(currentDiet);
-
-            setParsedCookie('night', currentDiet);
-          }}
-        />
-
-        <Link href="/checkout">
-          <a>Book now</a>
-        </Link> */}
-
       <div className="section wave">
-        <div className="wave wave1"></div>
-        <div className="wave wave2"></div>
-        <div className="wave wave3"></div>
-        <div className="wavewave4"></div>
+        <div className="wave wave1"/>
+        <div className="wave wave2"/>
+        <div className="wave wave3"/>
+        <div className="wavewave4"/>
       </div>
     </div>
   );

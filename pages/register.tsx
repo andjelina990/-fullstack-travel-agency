@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import Head from 'next/head';
 import { RegisterResponseBody } from './api/register';
 import { useRouter } from 'next/router';

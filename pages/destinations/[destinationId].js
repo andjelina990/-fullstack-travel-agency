@@ -32,58 +32,6 @@ const btnhover = css`
     transform: translateY(0);
   }
 `;
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-};
-
-const cartt = css`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  a {
-    color: black;
-    text-decoration: none;
-    position: absolute;
-    top: 50px;
-    left: -50px;
-    background-color: #3a8bcd;
-    padding: 15px;
-    border-radius: 5px;
-    color: #fff;
-    :hover {
-      transform: scale(106%);
-    }
-  }
-`;
-const animalsStyles = css`
-  a {
-    text-decoration: none;
-    color: #000000;
-
-    p {
-      color: #fff;
-      background-color: #3a8bcd;
-      padding: 5px;
-      display: inline-block;
-      border-radius: 5px;
-    }
-  }
-  color: black;
-  border-radius: 5px;
-  padding: 20px 30px;
-  & + & {
-    margin-top: 10px;
-  }
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-`;
 
 export default function Destination(props) {
   if (!props.destination.length) {
@@ -123,61 +71,6 @@ export default function Destination(props) {
           </div>
         </div>
       </div>
-      {/*
-      <h1>{props.destination[0].destination}</h1> */}
-
-      {/* <div>
-        <h1>{props.destination[0].destination}</h1>
-
-        {props.destination.map((place) => {
-          return (
-            <div key={`destination-${place.id}`}>
-              <Link href={`/hotels/${place.id}`}>
-                <a>
-                  <div> Hotel:{place.name}</div>
-
-                  <div> Price:{place.night_price}</div>
-                  <button className="btn btn-primary mt-3">More</button>
-                </a>
-              </Link>
-            </div>
-          );
-        })}
-      </div> */}
-      {/* <div class="card2">
-        <div class="imgbox">
-          <img src="/1.jpg" />
-        </div>
-        <div class="content">
-          <h3>post title</h3>
-          <p>
-            lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamcon Ut enim ad minim
-            veniam, quis nostrud exercitation
-          </p>
-          <a href="#">read more</a>
-        </div>
-      </div> */}
-      {/* <div>
-        {props.destination.map((place) => {
-          return (
-            <div key={`destination-${place.id}`}>
-              <Link href={`/hotels/${place.id}`}>
-                <a>
-                  <Image src={`/${place.name}.jpg`} width="370" height="300" />
-                  <div> Hotel:{place.name}</div>
-
-                  <div> Price:{place.night_price}</div>
-                  <div> Hotel:{place.name}</div>
-
-                  <button className="btn btn-primary mt-3">More</button>
-                </a>
-              </Link>
-            </div>
-          );
-        })}
-      </div> */}
 
       <div>
         <section className="programs">
