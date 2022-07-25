@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { getDestinationsAndHotelsById } from '../../util/databaseHa';
 import 'animate.css';
-import React, { Component } from 'react';
 
 const btnhover = css`
   text-decoration: none;

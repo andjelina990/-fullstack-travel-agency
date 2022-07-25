@@ -1,6 +1,4 @@
-import React from 'react';
 import 'animate.css';
-import Navbar from './Navbar';
 
 function Header() {
   return (
