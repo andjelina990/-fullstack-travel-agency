@@ -310,7 +310,7 @@ function Header() {
                   <i className="fas fa-map-marker-alt" />
                   &nbsp;Destinations
                 </p>
-                <h3 className="card-title">Venice</h3>
+                <h3 className="card-title">Croatia</h3>
                 <p className="card-text">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
                   velit?

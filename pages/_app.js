@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
   }, [refreshUserProfile]);
   return (
     <div>
-      <CookiesModal />
+      {/* <CookiesModal /> */}
       <Layout user={user}>
         {/*
           The "Component" component refers to

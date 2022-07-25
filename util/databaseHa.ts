@@ -30,6 +30,13 @@ function connectOneTimeToDatabase() {
 // Connect to PostgreSQL
 const sql = connectOneTimeToDatabase();
 
+export type Animal = {
+  id: number;
+  firstName: string;
+  type: string;
+  accessory: string;
+};
+
 export type Destination = {
   id: number;
   firstName: string;

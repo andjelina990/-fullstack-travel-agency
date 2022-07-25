@@ -3,12 +3,34 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '../../config/urlConfig';
 import { getUserByValidSessionToken, User } from '../../util/databaseHa';
+import { css } from '@emotion/react';
 
 type Props = {
   user?: User;
 };
 
+const style = css`
+  min-height: 500px;
+  text-align: center;
+  margin-top: 30px;
+`;
+
+const main = css`
+  margin-bottom: 50px;
+`;
 export default function UserDetail(props: Props) {
+  if (!props.user) {
+    return (
+      <>
+        <Head>
+          <title>User not found</title>
+          <meta name="description" content="User not found" />
+        </Head>
+        <h1>404 - User not found</h1>
+        Better luck next time
+      </>
+    );
+  }
   const [bookingData, setBookingData] = useState([]);
   const [requestFinish, setRequestFinish] = useState(false);
   const [errorMsg, setErrorMsg] = useState({ have: false, err: null });
@@ -85,19 +107,6 @@ export default function UserDetail(props: Props) {
     );
   };
 
-  if (!props.user) {
-    return (
-      <>
-        <Head>
-          <title>User not found</title>
-          <meta name="description" content="User not found" />
-        </Head>
-        <h1>404 - User not found</h1>
-        Better luck next time
-      </>
-    );
-  }
-
   return (
     <div>
       <Head>
@@ -105,12 +114,13 @@ export default function UserDetail(props: Props) {
         <meta name="description" content="About the app" />
       </Head>
 
-      <main style={{ minHeight: '500px' }}>
-        <h1>
-          User #{props.user.id} (username: {props.user.username})
-        </h1>
-        <div>id: {props.user.id}</div>
-        <div>username: {props.user.username}</div>
+      <main css={style}>
+        <div css={main}>
+          {' '}
+          <h1>Welcome to your profile page: {props.user.username}</h1>
+        </div>
+        {/* <div>id: {props.user.id}</div>
+        <div>username: {props.user.username}</div> */}
         {requestFinish && bookingLayout()}
       </main>
     </div>
@@ -124,7 +134,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-  // console.log(user);
+  console.log(user);
 
   if (user) {
     return {

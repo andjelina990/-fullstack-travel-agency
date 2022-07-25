@@ -5,6 +5,35 @@ import { getDestinationsAndHotelsById } from '../../util/databaseHa';
 import 'animate.css';
 import React, { Component } from 'react';
 
+const btnhover = css`
+  text-decoration: none;
+  color: white;
+  font-family: sans-serif;
+  font-size: 40px;
+  border: 3px solid white;
+  padding: 40px 80px;
+  position: relative;
+  transition: all 1s;
+  overflow: hidden;
+  &:before {
+    content: 'YEAH!';
+    color: white;
+    background-color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateY(-100%);
+    transition: all 0.5s;
+  }
+  &:hover:before {
+    transform: translateY(0);
+  }
+`;
 const settings = {
   dots: true,
   infinite: true,
@@ -181,7 +210,9 @@ export default function Destination(props) {
                     </p>
                   </div>
                   <Link href={`/hotels/${place.id}`}>
-                    <button className="my-2">Book now</button>
+                    <button css={btnhover} className="my-2">
+                      Book now
+                    </button>
                   </Link>
                 </div>
                 <div className="thumbnail">

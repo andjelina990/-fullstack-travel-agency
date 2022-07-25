@@ -6,20 +6,28 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 
-import { getHotelsById, queryParamToNumber } from '../../util/databaseHa';
-import { Placeholder } from 'react-bootstrap';
+import {
+  Animal,
+  getHotelsById,
+  queryParamToNumber,
+} from '../../util/databaseHa';
 
-// const header = css`
-//   background-color: #f4f9fd;
-//   img {
-//     width: 100%;
-//     height: auto;
-//     display: block;
-//   }
-// `;
+const hover = css`
+  &:hover {
+    background-color: var(--blue);
+    color: #fff;
+    transition: 0.3 easy;
+    cursor: pointer;
+  }
+`;
 
 type Props = {
-  animal: Animal | null;
+  animal: {
+    id: string;
+    nightPrice: number;
+    name: string;
+    eatCounter: number;
+  };
 };
 
 export type NightHotel = {
@@ -51,7 +59,7 @@ export default function SingleAnimal(props: Props) {
                 Price per Night:
                 <span>
                   <i className="fas fa-tags" />
-                  {props.animal.nightPrice}
+                  {props.animal.nightPrice}$
                 </span>
               </p>
             </div>
@@ -133,7 +141,7 @@ export default function SingleAnimal(props: Props) {
                 </>
               ) : (
                 ''
-              )}{' '}
+              )}
             </div>
           </div>
 
@@ -156,7 +164,9 @@ export default function SingleAnimal(props: Props) {
           />
 
           <Link href="/checkout">
-            <a className="book-btn">Book now</a>
+            <a css={hover} className="book-btn">
+              Book now
+            </a>
           </Link>
         </div>
         <div className="thumbnail">

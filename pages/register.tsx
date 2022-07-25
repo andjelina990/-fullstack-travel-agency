@@ -64,7 +64,7 @@ export default function Register(props: Props) {
         <title>Register</title>
         <meta name="description" content="Register a new user" />
       </Head>
-      <main style={{ minHeight: '500px' }}>>
+      <main style={{ minHeight: '500px' }}>
         <h1>Register</h1>
         <label>
           username:{' '}

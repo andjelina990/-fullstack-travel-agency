@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import cookie from 'cookie';
+import { NightHotel } from '../pages/hotels/[destinationId]';
 
 export function getParsedCookie(key: string) {
   const cookieValue = Cookies.get(key); // Type is string | undefined
@@ -20,8 +21,16 @@ export function getParsedCookie(key: string) {
 //   eatCounter: number;
 // };
 
-export function setParsedCookie(key: string, value: FruitInDiet[]) {
+export function setParsedCookie(key: string, value: NightHotel[]) {
   Cookies.set(key, JSON.stringify(value));
+}
+
+export function stringifyCookieValue(value: NightHotel[]) {
+  return JSON.stringify(value);
+}
+
+export function deleteCookie(key: string) {
+  Cookies.remove(key);
 }
 
 export function createSerializedRegisterSessionTokenCookie(token: string) {

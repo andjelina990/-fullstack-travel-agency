@@ -9,7 +9,7 @@ function CookiesModal() {
   useEffect(() => {
     setTimeout(() => {
       setModalShow(true);
-    }, 5000);
+    }, 8000);
   }, []);
 
   const onClickUnderstand = (e) => {

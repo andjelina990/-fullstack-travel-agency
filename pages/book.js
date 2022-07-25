@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Router from 'next/router';
 import { setParsedCookie } from '../util/cookies';
+import { css } from '@emotion/react';
+
+const h1 = css`
+  text-align: center;
+  padding-bottom: 50px;
+`;
 
 export default function Checkout() {
   const cardSelect = useRef();
@@ -49,6 +55,9 @@ export default function Checkout() {
 
   return (
     <div className="container">
+      <div css={h1}>
+        <h1>Checkout</h1>
+      </div>
       <div className="row">
         <div className="col-10 offset-1">
           <form onSubmit={checkoutInfo}>
@@ -117,7 +126,7 @@ export default function Checkout() {
               }}
             />
 
-            <button className="btn btn-success mt-3">Confirm</button>
+            <button className="btn btn-danger my-3">Confirm</button>
           </form>
           {errForm && <div className="alert alert-danger mt-3">{errForm}</div>}
         </div>
