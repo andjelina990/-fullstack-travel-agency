@@ -22,11 +22,11 @@ export default async function handler(
     );
     res.json('Success booking');
   } else if (req.method === 'GET') {
-    const userId = req.query.id;
+    const userId = Number(req.query.id);
     const myBookingPlans = await getBookingPlan(userId);
     res.status(200).json(myBookingPlans);
   } else if (req.method === 'DELETE') {
-    const booking_id = req.query.id;
+    const booking_id = Number(req.query.id);
     const myBookingPlans = await removeBooking(booking_id);
     res.status(200).json(myBookingPlans);
   } else {

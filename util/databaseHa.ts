@@ -306,12 +306,12 @@ export function queryParamToNumber(queryParam: string | string[] | undefined) {
   return Number(queryParam);
 }
 
-export async function getBookingPlan(userId: string) {
+export async function getBookingPlan(userId: number) {
   const bookingPlans = await sql`
   SELECT
     booking.id AS bookingId,
     booking.nights,
-    booking.start_date,
+    TO_CHAR(booking.start_date, 'YY-MM-DD') as start_date,
 
     destinations.id,
     destinations.destination,
@@ -339,14 +339,18 @@ export async function addToBookingPlan(
   user_id: number,
   start_date: Date,
 ) {
-  const bookingPlan = await sql`
+  try {
+    const bookingPlan = await sql`
   INSERT INTO booking
     (nights, hotel_id, user_id, start_date)
   VALUES
     (${nights}, ${hotel_id}, ${user_id}, ${start_date})
   `;
+  } catch (err) {
+    console.log(err);
+  }
 
-  return bookingPlan;
+  // return bookingPlan;
 }
 
 export type Booking = {
@@ -358,10 +362,11 @@ export type Booking = {
 };
 
 export async function removeBooking(booking_id: number) {
-  const bookingPlan = await sql`
+  const [bookingPlan] = await sql`
   DELETE FROM
     booking
   WHERE id =${booking_id}
+  RETURNING *
   `;
 
   return bookingPlan;

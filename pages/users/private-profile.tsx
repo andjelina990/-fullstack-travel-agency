@@ -2,11 +2,26 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '../../config/urlConfig';
-import { getUserByValidSessionToken, User } from '../../util/databaseHa';
+import {
+  getBookingPlan,
+  getUserByValidSessionToken,
+  User,
+} from '../../util/databaseHa';
 import { css } from '@emotion/react';
 
 type Props = {
-  user?: User;
+  user: User | null;
+  bookingsByUserId: {
+    bookingid: number;
+    nights: number;
+    start_date: string;
+    id: number;
+    destination: string;
+    description: string;
+    name: string;
+    destination_id: number;
+    night_price: number;
+  }[];
 };
 
 const style = css`
@@ -31,42 +46,50 @@ export default function UserDetail(props: Props) {
       </>
     );
   }
-  const [bookingData, setBookingData] = useState([]);
-  const [requestFinish, setRequestFinish] = useState(false);
-  const [errorMsg, setErrorMsg] = useState({ have: false, err: null });
-  useEffect(() => {
-    getMyBookings();
-  }, []);
 
-  const getMyBookings = () => {
-    fetch(BASE_URL + `/api/booking?id=${props.user.id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) => setBookingData(data))
-      .catch((err) => {
-        console.log(err);
-        setErrorMsg({ have: true, err: err });
-      })
-      .finally(() => {
-        setRequestFinish(true);
-      });
-  };
+  const [bookingData, setBookingData] = useState(props.bookingsByUserId);
+  console.log(bookingData);
+  // const [bookingData, setBookingData] = useState([]);
+  // const [requestFinish, setRequestFinish] = useState(false);
+  const [errorMsg, setErrorMsg] = useState({ have: false, err: null });
+  console.log(bookingData);
+  // useEffect(() => {
+  //   getMyBookings();
+  // }, []);
+
+  // const getMyBookings = () => {
+  //   fetch(BASE_URL + `/api/booking?id=${props.user.id}`, {
+  //     method: 'GET',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setBookingData(data))
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setErrorMsg({ have: true, err: err });
+  //     })
+  //     .finally(() => {
+  //       setRequestFinish(true);
+  //     });
+  // };
   const removeBooking = (bookingId: number) => {
     fetch(BASE_URL + `/api/booking?id=${bookingId}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
+      .then((deletedBooking) =>
+        setBookingData((prevBooking) =>
+          prevBooking.filter(
+            (booking) => booking.bookingid !== deletedBooking.id,
+          ),
+        ),
+      )
       .catch((err) => {
         console.log(err);
         setErrorMsg({ have: true, err: err });
-      })
-      .finally(() => {
-        getMyBookings();
       });
   };
 
-  const bookingLayout = () => {
+  const BookingLayout = () => {
     return !errorMsg.have ? (
       <table className="table">
         <thead>
@@ -79,20 +102,18 @@ export default function UserDetail(props: Props) {
           </tr>
         </thead>
         <tbody>
-          {bookingData.map((el: any) => {
-            console.log(bookingData);
-
+          {bookingData.map((booking) => {
             return (
-              <tr key={el.bookingid}>
-                <td>{el.name}</td>
-                <td>{el.destination}</td>
-                <td>{el.nights}</td>
-                <td>{el.start_date}</td>
+              <tr key={booking.bookingid}>
+                <td>{booking.name}</td>
+                <td>{booking.destination}</td>
+                <td>{booking.nights}</td>
+                <td>{booking.start_date}</td>
 
                 <td>
                   <button
                     className="btn btn-danger"
-                    onClick={() => removeBooking(el.bookingid)}
+                    onClick={() => removeBooking(booking.bookingid)}
                   >
                     Delete
                   </button>
@@ -121,7 +142,7 @@ export default function UserDetail(props: Props) {
         </div>
         {/* <div>id: {props.user.id}</div>
         <div>username: {props.user.username}</div> */}
-        {requestFinish && bookingLayout()}
+        <BookingLayout />
       </main>
     </div>
   );
@@ -134,12 +155,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-  console.log(user);
+
+  if (!user) {
+    return {
+      props: { user: null },
+    };
+  }
+  const bookingsByUserId = await getBookingPlan(user.id);
 
   if (user) {
     return {
       props: {
         user: user,
+        bookingsByUserId,
       },
     };
   }

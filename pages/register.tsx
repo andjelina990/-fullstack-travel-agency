@@ -38,6 +38,7 @@ export default function Register(props: Props) {
       setErrors(registerResponseBody.errors);
       return;
     }
+    localStorage.setItem('user', JSON.stringify(registerResponseBody));
     const returnTo = router.query.returnTo;
 
     if (

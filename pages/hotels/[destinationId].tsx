@@ -149,7 +149,7 @@ export default function SingleAnimal(props: Props) {
           <input
             className="date"
             type="date"
-            onInput={(e) => {
+            onChange={(e) => {
               const currentDiet = Cookies.get('night')
                 ? getParsedCookie('night')
                 : [];
